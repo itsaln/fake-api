@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CompanyStatus {
+  active
+  inactive
+}
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name           String
+  type           String
+  status         CompanyStatus
+  relations      Int
+  accountManager String        @map("account_manager")
+  zip            String
+  phone          String
+  email          String        @unique
+  tax            String
+  city           String
+  country        String
+  business       String
+}
